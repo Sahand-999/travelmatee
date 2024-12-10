@@ -4,40 +4,38 @@
  */
 package travelmate;
 
-public class activity {
-    private int activityId;
-    private String name;
-    private city city;
-    private String description;
+public class activity extends attraction {
+    private String activityType;
+    private int duration;  // Duration in hours
 
-    public activity(int activityId, String name, city city, String description) {
-        this.activityId = activityId;
-        this.name = name;
-        this.city = city;
-        this.description = description;
+    public activity(int id, String name, city city, String address, String activityType, int duration) {
+        super(id, name, city, address);
+        this.activityType = activityType;
+        this.duration = duration;
     }
 
-    public String getDetails() {
-        return name + ": " + description;
+    @Override
+    public void displayDetails() {
+        System.out.println("Activity: " + getName() + " | Duration: " + duration + " hours");
     }
 
     public static activity[] getActivitiesForCity(city selectedCity) {
         activity[] activities = new activity[4];
-        if (selectedCity.getName().equalsIgnoreCase("erbil")) {
-            activities[0] = new activity(1, "Visit the Citadel", selectedCity, "A historic site in the heart of Erbil.");
-            activities[1] = new activity(2, "Shopping in Gulan Street", selectedCity, "A popular street for shopping and dining.");
-            activities[2] = new activity(3, "Kurdistan Museum", selectedCity, "Learn about the history of the Kurdistan region.");
-            activities[3] = new activity(4, "Erbil Park", selectedCity, "A large public park perfect for family outings.");
-        } else if (selectedCity.getName().equalsIgnoreCase("sulaymaniyah")) {
-            activities[0] = new activity(1, "Visit Sarchnar Park", selectedCity, "A beautiful park with lakes and green areas.");
-            activities[1] = new activity(2, "Bazaar Shopping", selectedCity, "Explore the markets and local crafts of Sulaymaniyah.");
-            activities[2] = new activity(3, "Visit ahmad awa ", selectedCity, "A stunning place located outside Sulaymaniyah.");
-            activities[3] = new activity(4, "visit chavi land ", selectedCity, "Chavi Land is a prominent amusement park situated on the Goizha Mountains in Sulaymaniyah.");
-        } else if (selectedCity.getName().equalsIgnoreCase("duhok")) {
-            activities[0] = new activity(1, "Mountain Hiking", selectedCity, "Trek in the beautiful mountains surrounding Duhok.");
-            activities[1] = new activity(2, "Visit the Ancient Ruins", selectedCity, "Explore historical ruins in the region.");
-            activities[2] = new activity(3, "Lake Duhok", selectedCity, "Relax by the scenic lake in Duhok.");
-            activities[3] = new activity(4, "Visit the Duhok Archaeological Museum", selectedCity, "Explore artifacts from ancient civilizations.");
+        if (selectedCity.getName().equals("erbil")) {
+            activities[0] = new activity(1, "Shopping at Family Mall", selectedCity, "Family Mall", "Shopping", 2);
+            activities[1] = new activity(2, "Hiking in Safin Mountain", selectedCity, "Safin Mountain", "Hiking", 3);
+            activities[2] = new activity(3, "Cable Car Ride", selectedCity, "Shanidar Park", "Adventure", 1);
+            activities[3] = new activity(4, "Visiting Local Bazaars", selectedCity, "Erbil City Center", "Cultural", 2);
+        } else if (selectedCity.getName().equals("sulaymaniyah")) {
+            activities[0] = new activity(1, "Hiking in Goizha Mountains", selectedCity, "Goizha Mountains", "Hiking", 4);
+            activities[1] = new activity(2, "Cultural Tours", selectedCity, "City Center", "Cultural", 3);
+            activities[2] = new activity(3, "Boat Rides in Dokan Lake", selectedCity, "Dokan Lake", "Adventure", 2);
+            activities[3] = new activity(4, "Picnic in Chavi Land", selectedCity, "Azadi Park", "Leisure", 2);
+        } else if (selectedCity.getName().equals("duhok")) {
+            activities[0] = new activity(1, "Hiking in Zawa Mountain", selectedCity, "Zawa", "Hiking", 3);
+            activities[1] = new activity(2, "Boating in Duhok Dam", selectedCity, "Duhok Dam", "Adventure", 2);
+            activities[2] = new activity(3, "Exploring Delal Bridge", selectedCity, "Zakho", "Sightseeing", 1);
+            activities[3] = new activity(4, "Relaxing at Bekhal Waterfall", selectedCity, "Bekhal", "Leisure", 2);
         }
         return activities;
     }
