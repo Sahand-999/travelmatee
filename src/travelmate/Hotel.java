@@ -1,41 +1,34 @@
 package travelmate;
 
-public class Hotel extends Accommodation {
-    private int stars;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Hotel(int id, String name, String address, int stars) {
+class Hotel extends Accommodation {
+    public Hotel(int id, String name, String address) {
         super(id, name, address);
-        this.stars = stars;
-    }
-
-    public int getStars() {
-        return stars;
     }
 
     @Override
     public void displayDetails() {
-        System.out.println("Hotel Name: " + getName());
-        System.out.println("Address: " + getAddress());
-        System.out.println("Stars: " + stars);
+        System.out.println("Hotel Details: " + getName() + ", " + getAddress());
     }
 
-    public static Accommodation[] getHotelsForCity(City city) {
-        if (city.getName().equals("Erbil")) {
-            return new Accommodation[]{
-                new Hotel(1, "Erbil International Hotel", "100 Meter Street", 5),
-                new Hotel(2, "Divan Erbil", "Downtown", 5)
-            };
-        } else if (city.getName().equals("Sulaymaniyah")) {
-            return new Accommodation[]{
-                new Hotel(3, "Grand Millennium", "City Center", 5),
-                new Hotel(4, "Titanic Hotel", "Salim Street", 4)
-            };
-        } else if (city.getName().equals("Duhok")) {
-            return new Accommodation[]{
-                new Hotel(5, "Parliament Hotel", "Main Square", 4),
-                new Hotel(6, "Khan Hotel", "Barzani Road", 3)
-            };
+    public static Accommodation[] getAccommodationsForCity(City city) {
+        List<Accommodation> hotels = new ArrayList<>();
+        switch (city.getName().toLowerCase()) {
+            case "erbil":
+                hotels.add(new Hotel(1, "Divan Erbil", "Gulan Street, Erbil"));
+                hotels.add(new Hotel(2, "Erbil Rotana", "100 Meter Road, Erbil"));
+                break;
+            case "sulaymaniyah":
+                hotels.add(new Hotel(3, "Grand Millennium Hotel", "Bakhtiary, Sulaymaniyah"));
+                hotels.add(new Hotel(4, "Ramada Sulaymaniyah", "Salim Street, Sulaymaniyah"));
+                break;
+            case "duhok":
+                hotels.add(new Hotel(5, "Kristal Hotel", "Zakho Street, Duhok"));
+                hotels.add(new Hotel(6, "Parwar Hotel", "KRO District, Duhok"));
+                break;
         }
-        return new Accommodation[0];
+        return hotels.toArray(new Accommodation[0]);
     }
 }

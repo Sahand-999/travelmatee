@@ -43,5 +43,4 @@ public class Activity extends Attraction {
     @Override
     public void displayDetails() {
         System.out.println("Name: " + getName() + "\nAddress: " + getAddress() + "\nActivity Type: " + activityType + "\nDuration: " + duration + " hours");
-    }
-}
+    }}
